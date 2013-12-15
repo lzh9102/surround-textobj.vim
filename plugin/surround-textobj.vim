@@ -31,10 +31,6 @@ function! s:FindSurroundSymbolRange(symbol, string, position)
   endwhile
 
   " error checking
-  if left == right
-    " only a single occurrence of the symbol was found
-    return []
-  endif
   if left < 0 || right >= length
     " cursor is not surrounded by the symbol
     return []
