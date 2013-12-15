@@ -73,10 +73,14 @@ function! s:MotionSurroundSymbol(symbol, inner)
 endfunction
 
 function! s:RegisterSymbol(symbol)
-  exe 'vnoremap <silent> i' . a:symbol . ' <ESC>:call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 1)<CR>'
-  exe 'vnoremap <silent> a' . a:symbol . ' <ESC>:call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 0)<CR>'
-  exe 'onoremap <silent> i' . a:symbol . ' :call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 1)<CR>'
-  exe 'onoremap <silent> a' . a:symbol . ' :call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 0)<CR>'
+  exe 'vnoremap <silent> i' . a:symbol .
+        \ ' <ESC>:call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 1)<CR>'
+  exe 'vnoremap <silent> a' . a:symbol .
+        \ ' <ESC>:call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 0)<CR>'
+  exe 'onoremap <silent> i' . a:symbol .
+        \ ' :call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 1)<CR>'
+  exe 'onoremap <silent> a' . a:symbol .
+        \ ' :call <SID>MotionSurroundSymbol(''' . a:symbol . ''', 0)<CR>'
 endfunction
 
 function! s:RegisterSymbols(symbolstr)
