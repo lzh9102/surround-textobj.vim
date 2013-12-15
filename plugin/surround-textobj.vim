@@ -30,6 +30,13 @@ function! s:FindSurroundSymbolRange(symbol, string, position)
     let right = right + 1
   endwhile
 
+  " handle the case that cursor is positioned on the right-end, for example:
+  " ...$hello$...
+  "          ^ <- cursor position (assume symbol is '$')
+  if left == a:position && right >= length
+    return <SID>FindSurroundSymbolRange(a:symbol, a:string, left-1)
+  endif
+
   " error checking
   if left < 0 || right >= length
     " cursor is not surrounded by the symbol
