@@ -94,7 +94,7 @@ function! s:RegisterSymbols(symbolstr)
 endfunction
 
 if !exists("g:surround_textobj_symbols")
-  let g:surround_textobj_symbols = '!@#$%^&*_-+=;:/?.,'
+  let g:surround_textobj_symbols = '~!@#$%^&*_-+=;:/?.,'
 endif
 
 call <SID>RegisterSymbols(g:surround_textobj_symbols)
