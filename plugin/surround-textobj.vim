@@ -1,5 +1,7 @@
 " surround-textobj.vim - text object motion for text surrounded by a symbol
-" Copyright (C) 2013 Che-Huai Lin <lzh9102@gmail.com>
+"
+" Author: Che-Huai Lin <lzh9102@gmail.com>
+" License: Vim license
 
 " Get the range of textobject (including the surrounding symbols).
 " Returns a list with two elements: [leftcol, rightcol] or an empty list if the

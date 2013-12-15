@@ -21,3 +21,8 @@ default setting is
 ```vim
 let g:surround_textobj_symbols = '~!@#$%^&*_-+=;:/?.,'
 ```
+
+### Copyright
+
+This plugin is distributed under the terms of the Vim license. See
+`:help license` for the full text of the license.
