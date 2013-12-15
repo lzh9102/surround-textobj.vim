@@ -22,7 +22,7 @@ function! s:FindSurroundSymbolRange(symbol, string, position)
   endwhile
 
   " find the right end
-  let right = a:position
+  let right = a:position+1
   while right < length
     if strpart(a:string, right, 1) == a:symbol
       break
