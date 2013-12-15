@@ -4,24 +4,22 @@
 " Get the range of textobject (including the surrounding symbols).
 " Returns a list with two elements: [leftcol, rightcol] or an empty list if the
 " range could not be determined.
-function! s:FindSurroundSymbolRange(symbol)
-  let line = getline('.')
-  let length = strlen(line)
-  let curpos = getpos('.')[2]-1
+function! s:FindSurroundSymbolRange(symbol, string, position)
+  let length = strlen(a:string)
 
   " find the left end
-  let left = curpos
+  let left = a:position
   while left >= 0
-    if strpart(line, left, 1) == a:symbol
+    if strpart(a:string, left, 1) == a:symbol
       break
     endif
     let left = left - 1
   endwhile
 
   " find the right end
-  let right = curpos
+  let right = a:position
   while right < length
-    if strpart(line, right, 1) == a:symbol
+    if strpart(a:string, right, 1) == a:symbol
       break
     endif
     let right = right + 1
@@ -42,8 +40,10 @@ function! s:FindSurroundSymbolRange(symbol)
 endfunction
 
 function! s:MotionSurroundSymbol(symbol, inner)
+  let line = getline('.')
+  let curpos = getpos('.')[2]-1
 
-  let range = <SID>FindSurroundSymbolRange(a:symbol)
+  let range = <SID>FindSurroundSymbolRange(a:symbol, line, curpos)
   if len(range) == 0
     return
   endif
