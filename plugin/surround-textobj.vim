@@ -9,7 +9,7 @@ function! s:FindSurroundSymbolRange(symbol, string, position)
 
   " exit if the line is empty
   if length == 0
-    return
+    return []
   endif
 
   " find the left end
