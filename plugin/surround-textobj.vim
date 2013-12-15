@@ -89,4 +89,8 @@ function! s:RegisterSymbols(symbolstr)
   endwhile
 endfunction
 
-call <SID>RegisterSymbols('!@#$%^&*_-+=;:/?.,')
+if !exists("g:surround_textobj_symbols")
+  let g:surround_textobj_symbols = '!@#$%^&*_-+=;:/?.,'
+endif
+
+call <SID>RegisterSymbols(g:surround_textobj_symbols)
