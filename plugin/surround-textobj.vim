@@ -7,6 +7,11 @@
 function! s:FindSurroundSymbolRange(symbol, string, position)
   let length = strlen(a:string)
 
+  " exit if the line is empty
+  if length == 0
+    return
+  endif
+
   " find the left end
   let left = a:position
   while left >= 0
