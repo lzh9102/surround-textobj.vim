@@ -59,9 +59,11 @@ function! s:MotionSurroundSymbol(symbol, inner)
   let leftcol = range[0]
   let rightcol = range[1]
 
+  " i + symbol: exclude both left-end and right-end
+  " a + symbol: exclude left-end and include right-end
+  let leftcol = leftcol + 1
   if a:inner
-    " exclude surrounding symbols
-    let leftcol = leftcol + 1
+    " i + symbol
     let rightcol = rightcol - 1
   end
 
