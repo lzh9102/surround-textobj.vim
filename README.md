@@ -15,8 +15,8 @@ fields. For example, when cursor is placed inside `long` in
 `underscore_delimited_variable` instead of `underscore_delimitedvariable`.
 
 The symbols to be included can be changed by setting
-`g:surround_textobj_symbols` to a string containing desired symbols. The
-default setting is
+`g:surround_textobj_symbols` to a string containing desired symbols in
+`~/.vimrc`. The default setting is
 
 ```vim
 let g:surround_textobj_symbols = '~!@#$%^&*_-+=;:/?.,'
