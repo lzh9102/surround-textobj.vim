@@ -7,8 +7,8 @@
 function! s:FindSurroundSymbolRange(symbol, string, position)
   let length = strlen(a:string)
 
-  " exit if the line is empty
-  if length == 0
+  " sanity check
+  if length == 0 || a:position < 0 || a:position >= length
     return []
   endif
 
