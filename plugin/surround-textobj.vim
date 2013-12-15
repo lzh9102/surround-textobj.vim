@@ -1,7 +1,10 @@
-" surround-textobj.vim - Text-Object like motion for text surrounded by a symbol
+" surround-textobj.vim - text object motion for text surrounded by a symbol
 " Copyright (C) 2013 Che-Huai Lin <lzh9102@gmail.com>
 
-function! s:MotionSurroundSymbol(symbol, inner)
+" Get the range of textobject (including the surrounding symbols).
+" Returns a list with two elements: [leftcol, rightcol] or an empty list if the
+" range could not be determined.
+function! s:FindSurroundSymbolRange(symbol)
   let line = getline('.')
   let length = strlen(line)
   let curpos = getpos('.')[2]-1
@@ -25,23 +28,40 @@ function! s:MotionSurroundSymbol(symbol, inner)
   endwhile
 
   " error checking
+  if left == right
+    " only a single occurrence of the symbol was found
+    return []
+  endif
   if left < 0 || right >= length
     " cursor is not surrounded by the symbol
+    return []
+  endif
+
+  " column numbers starts from 1, so 1 should be added to the indices
+  return [left+1, right+1]
+endfunction
+
+function! s:MotionSurroundSymbol(symbol, inner)
+
+  let range = <SID>FindSurroundSymbolRange(a:symbol)
+  if len(range) == 0
     return
   endif
 
+  let leftcol = range[0]
+  let rightcol = range[1]
+
   if a:inner
     " exclude surrounding symbols
-    let left = left + 1
-    let right = right - 1
+    let leftcol = leftcol + 1
+    let rightcol = rightcol - 1
   end
 
   " visual select the (left,right) range
-  " both column and row begins at 1, so 1 should be added to the indices
   " if row number is zero, the cursor will stay at the current row
-  call cursor(0, left+1)
+  call cursor(0, leftcol)
   exe 'normal v'
-  call cursor(0, right+1)
+  call cursor(0, rightcol)
 endfunction
 
 function! s:RegisterSymbol(symbol)
