@@ -2,15 +2,46 @@
 " Copyright (C) 2013 Che-Huai Lin <lzh9102@gmail.com>
 
 function! s:MotionSurroundSymbol(symbol, inner)
+  let line = getline('.')
+  let length = strlen(line)
+  let curpos = getpos('.')[2]-1
+
+  " find the left end
+  let left = curpos
+  while left >= 0
+    if strpart(line, left, 1) == a:symbol
+      break
+    endif
+    let left = left - 1
+  endwhile
+
+  " find the right end
+  let right = curpos
+  while right < length
+    if strpart(line, right, 1) == a:symbol
+      break
+    endif
+    let right = right + 1
+  endwhile
+
+  " error checking
+  if left < 0 || right >= length
+    " cursor is not surrounded by the symbol
+    return
+  endif
+
   if a:inner
-    exe 'normal T' . a:symbol
-    exe 'normal v'
-    exe 'normal t' . a:symbol
-  else
-    exe 'normal F' . a:symbol
-    exe 'normal v'
-    exe 'normal f' . a:symbol
+    " exclude surrounding symbols
+    let left = left + 1
+    let right = right - 1
   end
+
+  " visual select the (left,right) range
+  " both column and row begins at 1, so 1 should be added to the indices
+  " if row number is zero, the cursor will stay at the current row
+  call cursor(0, left+1)
+  exe 'normal v'
+  call cursor(0, right+1)
 endfunction
 
 function! s:RegisterSymbol(symbol)
