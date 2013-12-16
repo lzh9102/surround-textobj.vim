@@ -1,5 +1,5 @@
-Surround TextObject
--------------------
+surround-textobj.vim
+--------------------
 
 In vim, one can quickly delete or change the text surrounded by parentheses and
 quotes using motion and text-objects. For example, `di'` will delete the text
